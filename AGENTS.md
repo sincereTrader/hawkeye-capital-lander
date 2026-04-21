@@ -4,6 +4,18 @@ This document is the **source of truth for AI and human agents** working on the 
 
 ---
 
+## Paper overrides everything (read first)
+
+The **Paper design system** at [app.paper.design/file/01KPJN44ARS3W2E809KQFHAWE3/2-0/185-0](https://app.paper.design/file/01KPJN44ARS3W2E809KQFHAWE3/2-0/185-0) (including linked artboards and exploration frames) is the **highest-priority** instruction set for this project.
+
+**If anything conflicts with Paper — including sections below, Linear issues, `references/` notes, DEW-58 copy policy, GEO or marketing heuristics, or prior agent assumptions — follow Paper.** Implement layouts, typography, colours, spacing, **and on-canvas copy** (headlines, body, metrics, credentials, CTAs) exactly as specified in Paper. Use `**get_jsx` / `get_computed_styles`** (and related Paper MCP tools) to translate to code; do not “fix” or replace Paper content to satisfy another rule.
+
+This override applies to **all designed screens**. For routes or components **not yet represented in Paper**, use the rest of this document and references until designs exist.
+
+While doing any tool calls, ensure that there is exact alignment with the brand tokens. If they are not given, ensure that the user puts the brand tokens on the same Paper page so that you can read from it.
+
+---
+
 ## Recommendations vs implementation (do not skip)
 
 The user often asks for **thinking**, not **shipping**. Treat these differently:
@@ -17,7 +29,7 @@ The user often asks for **thinking**, not **shipping**. Treat these differently:
 
 **If a message is ambiguous** (sounds like a question but could imply work), default to **recommendation-only** and offer a one-line ask: *Want me to apply this in Paper / the repo?*
 
-This applies especially to **Paper** (`hawkeyecapital.in`): design critique ≠ permission to restyle the canvas.
+This applies especially to **Paper** ([design system link](https://app.paper.design/file/01KPJN44ARS3W2E809KQFHAWE3/2-0/185-0)): design critique ≠ permission to restyle the canvas.
 
 ---
 
@@ -32,10 +44,12 @@ This applies especially to **Paper** (`hawkeyecapital.in`): design critique ≠ 
 
 ## Non-negotiables
 
-1. **Numbers policy (DEW-58):** Do **not** publish **AUM** or **client count** on the public site. Credibility = tenure, certifications, process, testimonials — not disclosed financials.
-2. **Scope of business:** Hawkeye is **mutual fund distribution** only for this site. Do not imply stock-picking RIA breadth unless copy is legally accurate.
-3. **Primary CTA:** WhatsApp **+91 9540134700** — prefer `wa.me` links; no mandatory web forms on v1 unless the user adds them.
-4. **Regulatory accuracy:** Distributor **ARN-156467** is confirmed from Rajesh. SEBI / AMFI claims on the site must match **approved legal copy** — never invent numbers or registration text beyond what is confirmed.
+These apply **except where Paper specifies otherwise** (see [Paper overrides everything](#paper-overrides-everything-read-first)). On designed pages, **Paper is the approval** for visible copy and numbers.
+
+1. **Published numbers and claims:** Whatever **Paper** shows on a shipped artboard (including **AUM**, **client counts**, tenure lines, or other metrics) **must be implemented as designed.** Do not strip or substitute metrics to match older written policies.
+2. **Scope of business:** Default: Hawkeye is **mutual fund distribution** for this site. If Paper copy implies a broader or narrower scope, **match Paper** and flag a product/legal review separately — do not unilaterally rewrite the canvas.
+3. **Primary CTA:** WhatsApp **+91 9540134700** — prefer `wa.me` links; no mandatory web forms on v1 unless Paper or the user adds them.
+4. **Regulatory strings:** Use the **exact registration / disclaimer / footer text from Paper** where it appears. Do not invent SEBI or AMFI numbers; if Paper and an old brief disagree, **Paper wins** for the build.
 
 ---
 
@@ -45,7 +59,7 @@ This applies especially to **Paper** (`hawkeyecapital.in`): design critique ≠ 
 - **Prefer platform primitives:** `<details>` / `<summary>` for FAQ if behavior matches UX; native links for navigation.
 - **No SPA requirement** — no client-side router for v1.
 - **Performance:** subset fonts, lazy non-critical images, avoid heavy carousels; respect `prefers-reduced-motion`.
-- **Conflict check:** If a Linear issue or old doc suggests putting AUM/client counts in HTML for “GEO,” **override with the numbers policy** above unless the user explicitly changes policy.
+- **Conflict check:** If a Linear issue or old doc conflicts with **Paper** on copy or metrics, **follow Paper** (see [Paper overrides everything](#paper-overrides-everything-read-first)).
 
 ---
 
@@ -85,11 +99,11 @@ Thin static pages are fine; legal review can follow.
 
 ## Design direction
 
-- **North-star aesthetic:** **[Sapient Wealth](https://sapientwealth.in)** — structured trust, multi-segment clarity, polished “wealth firm” feel. **Do not** copy their full service breadth, public AUM style, or page count; steal **layout discipline, trust framing, and footer/legal patterns**.
-- **Hawkeye differentiation:** Old-book / editorial warmth (forest, bark, parchment — see design brief), **human** over “platform,” **MF distribution** clarity.
-- **Design source of truth:** Paper file `**hawkeyecapital.in`** — artboards for landing (desktop/mobile) and FAQ (desktop/mobile). Prefer **get_jsx / get_computed_styles** when translating to code, not screenshots alone.
-- **Nav masthead:** Paper reserves a **square logo slot** (layer `**Logo placeholder — asset TBD`**, dashed gold outline) **before** the wordmark; **no SEBI/ARN line** in the top bar — use credentials, CTA footer, and legal pages for registration text. Replace the placeholder with the final client logo asset in build (see `references/hawkeye-design.md` → Global navigation).
-- **References folder:** `references/` — `hawkeye-capital-master.md`, `hawkeye-design.md`, `hawkeye-dew58-working-notes.md` — **copy and locked decisions** live here; reconcile with Linear if anything conflicts.
+- **North-star aesthetic:** **[Sapient Wealth](https://sapientwealth.in)** — structured trust, multi-segment clarity, polished “wealth firm” feel. **Do not** copy their full service breadth, public AUM style, or page count; steal **layout discipline, trust framing, and footer/legal patterns** (benchmark only — **Paper** defines what ships).
+- **Hawkeye differentiation:** As expressed in **Paper** and the brief: old-book / editorial warmth (forest, bark, parchment), **human** over “platform,” **MF distribution** clarity.
+- **Design source of truth:** Paper design system at [app.paper.design/file/01KPJN44ARS3W2E809KQFHAWE3/2-0/185-0](https://app.paper.design/file/01KPJN44ARS3W2E809KQFHAWE3/2-0/185-0). Prefer **get_jsx / get_computed_styles** when translating to code, not screenshots alone. **Do not deviate** from Paper for pixel implementation or copy.
+- **Nav masthead:** As in Paper — **square logo slot** (e.g. layer **Logo placeholder — asset TBD**, dashed gold outline) **before** the wordmark; registration lines live where Paper places them (e.g. credentials block, footer). Replace the placeholder with the final client logo asset in build when provided.
+- **References folder:** `references/` — `hawkeye-capital-master.md`, `hawkeye-design.md`, `hawkeye-dew58-working-notes.md` — background context only. **If a reference conflicts with Paper, ignore the reference for implementation.**
 
 ---
 
@@ -97,7 +111,7 @@ Thin static pages are fine; legal review can follow.
 
 - **Real content in HTML** — no critical copy injected only by JS.
 - **One clear `<h1>`** per page; logical heading order for sections and FAQ.
-- **FAQ answers** should work as **standalone paragraphs** (already drafted in DEW-58 notes) so LLMs can quote them cleanly.
+- **FAQ answers** should work as **standalone paragraphs** so LLMs can quote them cleanly. **Copy on the FAQ pages must match Paper** (`Hawkeye Capital — Mobile FAQ` / `Desktop FAQ`); DEW-58 notes are fallback only where Paper is silent.
 - **FAQPage JSON-LD** is optional until the domain is live and indexed — can be v1.1; do not block launch on schema alone.
 
 ---
@@ -111,7 +125,7 @@ Minimum credible cluster for a regulated Indian site (iterate with legal/complia
 - **Privacy policy** and **terms** when you collect data or run analytics
 - Optional: **disclosure** page or link to **SEBI** mutual fund resources (peers often link SID/SAI/KAM hubs — only if maintained)
 
-Never invent SEBI numbers or registration text.
+Do not invent SEBI numbers or registration text **except** by transcribing **exactly** what Paper specifies.
 
 ---
 
@@ -122,7 +136,7 @@ Use the **panel** in `references/hawkeye-design.md` (Dezerv, Stash Wealth, Artem
 When proposing a change, tag:
 
 - **Benchmark:** which site inspired it  
-- **Hawkeye constraint:** numbers policy, MF-only, WhatsApp-first  
+- **Hawkeye constraint:** match **Paper**; MF distribution positioning unless Paper says otherwise; WhatsApp CTA as in Paper  
 - **Verdict:** adopt / adapt / reject
 
 Same rubric for trust, IA, FAQ depth, CTA friction, mobile, performance, footer/legal.
@@ -152,10 +166,10 @@ Agents should **align implementation tickets** with this file and **update Linea
 2. **Deep copy / FAQ:** `references/hawkeye-dew58-working-notes.md`.
 3. **Visual system & sections:** `references/hawkeye-design.md`.
 4. **Business context:** `references/hawkeye-capital-master.md`.
-5. **Paper:** confirm against latest artboards before pixel-perfect implementation.
+5. **Paper:** confirm against latest artboards; implementation must **match Paper**, not this file’s older constraints.
 
-If instructions in chat **conflict** with this file, **ask the user** unless the conflict is an obvious error (e.g. outdated placeholder ARN).
+If instructions in chat **conflict** with **Paper**, **follow Paper**. If instructions in chat conflict with this file but **not** with Paper, follow this file. If **Paper** appears internally inconsistent, **ask the user** or use the latest edited artboard.
 
 ---
 
-*Last updated: 2026-04-20 — added “Recommendations vs implementation” for agents (Paper + repo).*
+*Last updated: 2026-04-21 — Paper is the supreme override; non-negotiables reframed to defer to Paper; credentials copy restored to match designs.*
