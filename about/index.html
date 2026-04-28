@@ -18,7 +18,7 @@
       <!-- Desktop nav — Paper About · MU-0 · MV-0 -->
       <header class="nav" aria-label="Primary">
         <a class="brand" href="/">
-          <div class="logo-ph logo-ph--lg" aria-hidden="true">LOGO</div>
+          <img class="logo-img" src="/assets/logo.png" alt="Hawkeye Capital logo" />
           <span class="wordmark">Hawkeye Capital</span>
         </a>
         <nav class="nav-links" aria-label="Site">
@@ -37,7 +37,7 @@
       <!-- Mobile nav — Paper About · NZ-0 · O0-0 -->
       <header class="nav--mobile" aria-label="Primary">
         <a class="brand" href="/">
-          <div class="logo-ph logo-ph--sm" aria-hidden="true">LOGO</div>
+          <img class="logo-img" src="/assets/logo.png" alt="Hawkeye Capital logo" />
           <span class="wordmark">Hawkeye Capital</span>
         </a>
         <div class="nav-mobile-right">
@@ -68,14 +68,12 @@
         <div class="about-body about-body--desktop">
           <section class="about-hero" aria-labelledby="about-title">
             <p class="about-eyebrow">About</p>
-            <div class="about-hero-row">
-              <h1 class="about-title" id="about-title">Rajesh Sahu</h1>
-              <div
-                class="about-portrait"
-                role="img"
-                aria-label="Illustrated portrait of Rajesh Sahu"
-              ></div>
-            </div>
+            <h1 class="about-title" id="about-title">Rajesh Sahu</h1>
+            <div
+              class="about-portrait"
+              role="img"
+              aria-label="Illustrated portrait of Rajesh Sahu"
+            ></div>
             <p class="about-subtitle">
               Founder &amp; Chief Investment Officer, Hawkeye Capital
             </p>
@@ -240,5 +238,63 @@
         </div>
       </main>
     </div>
+    <script>
+      // #region agent log
+      (function () {
+        if (typeof window === "undefined") return;
+        const postLog = (hypothesisId, location, message, data) =>
+          fetch("http://127.0.0.1:7828/ingest/9d2182f6-4441-4d9d-9c0a-d7bda2e30117", {
+            method: "POST",
+            headers: { "Content-Type": "application/json", "X-Debug-Session-Id": "a9590a" },
+            body: JSON.stringify({
+              sessionId: "a9590a",
+              runId: "about-layout-debug-1",
+              hypothesisId,
+              location,
+              message,
+              data,
+              timestamp: Date.now()
+            })
+          }).catch(() => {});
+
+        window.addEventListener("load", () => {
+          const row = document.querySelector(".about-hero-row");
+          const title = document.querySelector(".about-title");
+          const portrait = document.querySelector(".about-portrait");
+          const body = document.querySelector(".about-body--desktop");
+          if (!row || !title || !portrait || !body) return;
+
+          const rowRect = row.getBoundingClientRect();
+          const titleRect = title.getBoundingClientRect();
+          const portraitRect = portrait.getBoundingClientRect();
+          const bodyStyle = window.getComputedStyle(body);
+          const rowStyle = window.getComputedStyle(row);
+
+          postLog("H1", "about/index.html:248", "Desktop breakpoint snapshot", {
+            viewportWidth: window.innerWidth,
+            isDesktop: window.innerWidth >= 1100
+          });
+          postLog("H2", "about/index.html:252", "Hero row geometry", {
+            rowLeft: rowRect.left,
+            rowRight: rowRect.right,
+            rowWidth: rowRect.width,
+            titleLeft: titleRect.left,
+            titleRight: titleRect.right,
+            portraitLeft: portraitRect.left,
+            portraitRight: portraitRect.right
+          });
+          postLog("H3", "about/index.html:262", "Body padding values", {
+            bodyPaddingLeft: bodyStyle.paddingLeft,
+            bodyPaddingRight: bodyStyle.paddingRight
+          });
+          postLog("H4", "about/index.html:266", "Hero row flex alignment", {
+            flexDirection: rowStyle.flexDirection,
+            justifyContent: rowStyle.justifyContent,
+            alignItems: rowStyle.alignItems
+          });
+        });
+      })();
+      // #endregion
+    </script>
   </body>
 </html>
