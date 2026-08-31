@@ -130,8 +130,8 @@ a.brand:hover {
 }
 
 .nav--mobile .logo-img {
-  width: 40px;
-  height: 40px;
+  width: 38px;
+  height: 19px;
 }
 
 .nav-mobile-right {
@@ -143,10 +143,10 @@ a.brand:hover {
 }
 
 .logo-img {
-  width: 48px;
-  height: 48px;
+  width: 56px;
+  height: 28px;
   flex-shrink: 0;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .wordmark {
