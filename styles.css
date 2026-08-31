@@ -130,7 +130,7 @@ a.brand:hover {
 }
 
 .nav--mobile .logo-img {
-  width: 38px;
+  width: 39px;
   height: 19px;
 }
 
@@ -143,8 +143,8 @@ a.brand:hover {
 }
 
 .logo-img {
-  width: 56px;
-  height: 28px;
+  width: 49px;
+  height: 24px;
   flex-shrink: 0;
   object-fit: contain;
 }
