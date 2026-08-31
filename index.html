@@ -412,7 +412,8 @@
 
         dots.forEach((dot, index) => dot.addEventListener("click", () => showTestimonial(index)));
 
-        if (slides.length > 1) {
+        const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        if (slides.length > 1 && !reducedMotion) {
           const startTimer = () => {
             window.clearInterval(timer);
             timer = window.setInterval(() => showTestimonial(activeIndex + 1), 7000);
